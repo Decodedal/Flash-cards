@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styles/App.css"
+import Nav from "./nav";
 
 
 export default function DeleteCards(){
@@ -27,7 +28,7 @@ export default function DeleteCards(){
             const response = await fetch(`/delete/${id}`, {
               method: 'DELETE',
             });
-            if (!response.ok) {
+            if (response.ok) {
               throw new Error('Error deleting card');
             }
           } catch (error) {
@@ -45,6 +46,7 @@ export default function DeleteCards(){
 
     return(
         <>
+        <Nav/>
             <h1>Delete Page</h1>
             {
                 cards.map((card, i) =>{
@@ -54,7 +56,10 @@ export default function DeleteCards(){
                                 <p>Question : {card.question}</p>
                                 <p>Answer : {card.answer}</p>
                             </div>
-                            <button onClick={() => handleDelete(card.id)}>Delete</button>
+                            <div style={{display:"flex", gap:"1em", justifyContent:"center"}}>
+                              <button onClick={() => handleDelete(card.id)}>Delete</button>
+                              <a href={`/edit/${card.id}`}><button>Edit</button></a>
+                            </div>
                         </div>
                     )
                 })

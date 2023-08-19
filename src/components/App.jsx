@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import "../styles/App.css"
 import data from "../info.json"
 import Card from '../components/card'
+import Nav from './nav'
 
 function App() {
 
@@ -52,24 +53,21 @@ function App() {
     console.log(seen)
   }
 
+  if(loading)return <h1>Loading...</h1>
+
   return (
     <>
-      {
-        loading 
-        ?
-        <p>loading...</p>
-        :
-       <>
-      <p>{seen.length  + 1}/{keyValue.length}</p>
-      <h1>Flash Cards</h1>
+      <Nav/>
+      <div style={{display:'flex', alignItems:"center", gap:'2em'}}>
+        <h1>Flash Cards</h1>
+        <p>{seen.length  + 1}/{keyValue.length}</p>
+      </div>
           <div className={`${seen.length === keyValue.length -1 ? "show" : 'hide'}`}>
             <button id="reset" onClick={reset}>Great Job Reset?</button>
           </div>
       {keyValue[index]}
       <button onClick={() => handleNextCard()}>Next</button>
       </> 
-      }
-    </>
   )
 }
 

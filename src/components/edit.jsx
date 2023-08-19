@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/App.css"
+import Nav from "./nav";
 
 export default function EditCard({ id }){
     const questionRef = useRef(null)
@@ -27,13 +28,14 @@ export default function EditCard({ id }){
         console.log(questionRef.current.value);
         try {
           const response = await fetch('/fetchcards', {
-            method: "POST",
+            method: "PUT",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
               question: questionRef.current.value,
-              answer: answerRef.current.value
+              answer: answerRef.current.value,
+              id:id
             })
           });
           
@@ -43,7 +45,7 @@ export default function EditCard({ id }){
           }
           
           const post = await response.json(); // Parse the JSON response
-          console.log(post);
+          window.location.href = '/'
         } catch (err) {
           console.log(err);
         }
@@ -54,13 +56,14 @@ export default function EditCard({ id }){
 
     return(
     <>
+        <Nav/>
         <h2>Edit card</h2>
-        <div>
-            <div>
+        <div className="form">
+            <div className="edit">
                 <label htmlFor="q">Question</label>
                 <textarea ref={questionRef} id="q" type="text"/>
             </div>
-            <div>
+            <div className="edit">
                 <label htmlFor="a">Answer</label>
                 <textarea ref={answerRef} id="a" type="text"/>
             </div>

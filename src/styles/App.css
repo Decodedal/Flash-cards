@@ -34,3 +34,15 @@ body {
   box-shadow: #61dafbaa;
   transform: scale(1.1)
 }
+
+.edit{
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}

@@ -1,0 +1,26 @@
+.nav-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: chartreuse;
+    padding:1em;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    transition: all 300ms;
+}
+
+a:hover{
+    color: blue;
+    transform: scale(1.1);
+}
+
+.right{
+    display: flex;
+    gap:1em
+}

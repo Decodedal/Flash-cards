@@ -10,14 +10,12 @@ export async function get({ params, request }) {
 
   try {
     const data = await main()
-    await prisma.$disconnect()
-    return {
+        return {
       body: JSON.stringify(data),
     }
   } catch (e) {
     console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
+        process.exit(1)
   }
 }
 
@@ -31,14 +29,14 @@ export async function post({ request }) {
     const newCard = await prisma.post.create({
       data: cardData,
     });
-    await prisma.$disconnect();
+    
     return {
       status: 201,
       body: JSON.stringify(newCard),
     };
   } catch (e) {
     console.error(e);
-    await prisma.$disconnect();
+    
     return {
       status: 500,
       body: JSON.stringify({ error: 'An error occurred while creating the card' }),
@@ -46,3 +44,29 @@ export async function post({ request }) {
   }
 }
 
+export async function put({ request }){
+  try{
+    const body = await request.json();
+    
+    const updatedCard = await prisma.post.update({
+      where:{
+        id:parseInt(body.id)
+      },
+      data:{
+        question:body.question,
+        answer:body.answer
+      }
+    });
+    
+    return{
+      status:200,
+      body: JSON.stringify(updatedCard)
+    }
+  }catch(err){
+    console.log(err)
+    return{
+      status:500,
+      body:JSON.stringify({message:err})
+    }
+  }
+}
