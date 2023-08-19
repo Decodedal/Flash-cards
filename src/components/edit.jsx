@@ -7,19 +7,19 @@ export default function EditCard({ id }){
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        // const fetchCard = async () => {
-        //   try {
-        //     const response = await fetch(`edit/api/${id}`);
-        //     const data = await response.json(); // Corrected this line
-        //     questionRef.current.value = data.question;
-        //     answerRef.current.value = data.answer;
-            setLoading(false);
-        //   } catch (err) {
-        //     throw new Error(err);
-        //   }
-        // };
+        const fetchCard = async () => {
+          try {
+            const response = await fetch(`/api/${id}`);
+            const data = await response.json(); // Corrected this line
+            questionRef.current.value = data.question;
+            answerRef.current.value = data.answer;
+           setLoading(false);
+          } catch (err) {
+            console.log(err)
+          }
+        };
       
-        // fetchCard();
+        fetchCard();
       }, []);
       
 
@@ -49,7 +49,7 @@ export default function EditCard({ id }){
         }
       };
       
-    if(loading) return <h1>Loading...</h1> 
+    // if(loading) return <h1>Loading...</h1> 
 
 
     return(

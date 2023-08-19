@@ -6,15 +6,15 @@ export async function get({ params }) {
     const { id } = params; // Assume the ID is passed as a parameter
   
     try {
-      await prisma.post.findFirst({
+     const data =  await prisma.post.findUnique({
         where: {
           id: parseInt(id),
         },
       });
       await prisma.$disconnect();
       return { 
-            status: 204,
-            body:''
+            status: 200,
+            body:JSON.stringify(data)
         }; 
     } catch (e) {
       console.error(e);
