@@ -1,0 +1,10 @@
+---
+const { id } = Astro.params;
+import Layout from "../../layouts/Layout.astro";
+import EditCard from "../../components/edit"
+
+---
+
+<Layout title="edit card">
+    <EditCard id={id} />
+</Layout>

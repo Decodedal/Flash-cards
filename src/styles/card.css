@@ -1,0 +1,13 @@
+.card-container{
+    border: 1px solid black;
+    width: 25em;
+    min-height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(220, 220, 220);
+    font-weight: 500;
+    margin: 1em;
+}
+
+
