@@ -46,3 +46,8 @@ body {
   flex-direction: column;
   gap: 2em;
 }
+
+textarea{
+  width: 200px;
+  height: 100px;
+}

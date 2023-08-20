@@ -6,7 +6,7 @@ export default function Nav(){
             <a href="/">Home</a>
             <div className="right">
                 <a href='/new'>Add</a>
-                <a href='delete'>Edit / Delete</a>
+                <a href='/delete'>Edit / Delete</a>
             </div>
         </div>
     )

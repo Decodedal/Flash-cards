@@ -7,12 +7,20 @@ import Nav from './nav'
 function App() {
 
   const[loading, setLoading] = useState(true)
+  const [cardData, setCardData] = useState([])
+  const [keyValue, setKeyValue] = useState([])
+  const [seen, setSeen] = useState([])
+  const [index, setIndex] = useState(getRandomIntInclusive(0,keyValue.length-1))
+  const [showAnswer,setShowAnswer] = useState(false);
+  const [flip, setFlip] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("/fetchcards");
       const data = await response.json();
+      if(data.length === 0) window.location.href = "/new"
       console.log(data);
+      setCardData(data)
       setKeyValue((data).map(data => <Card q={data.question} a={data.answer}/>))
       setLoading(false)
     };
@@ -21,10 +29,7 @@ function App() {
 
   }, []); 
   
-
-  const [keyValue, setKeyValue] = useState([])
-  const [seen, setSeen] = useState([])
-  const [index, setIndex] = useState(getRandomIntInclusive(0,keyValue.length-1))
+ 
 
   function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -50,8 +55,15 @@ function App() {
   const handleNextCard = () =>{
     if(seen.length === keyValue.length -1)return;
     setSeen(prev => [...prev, index])
-    console.log(seen)
+    setShowAnswer(false)
+    setFlip(false)
   }
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setShowAnswer(flip)
+    }, 300);
+  },[flip])
 
   if(loading)return <h1>Loading...</h1>
 
@@ -65,7 +77,15 @@ function App() {
           <div className={`${seen.length === keyValue.length -1 ? "show" : 'hide'}`}>
             <button id="reset" onClick={reset}>Great Job Reset?</button>
           </div>
-      {keyValue[index]}
+      <div className={`card-container ${flip ? "card-flip" : undefined}`} onClick={() => setFlip(prev => !prev)}>
+           {
+             showAnswer 
+             ? 
+                 <p className='flip'>{cardData[index].answer}</p>
+             :
+                 <p>{cardData[index].question}</p>
+           }
+        </div>
       <button onClick={() => handleNextCard()}>Next</button>
       </> 
   )

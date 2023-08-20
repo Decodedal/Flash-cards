@@ -8,6 +8,19 @@
     background-color: rgb(220, 220, 220);
     font-weight: 500;
     margin: 1em;
+    transition: all 1s;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 
+.card-container p{
+    padding: 1em;
+}
 
+.card-flip{
+    transform: rotateY(180deg);
+    box-shadow: -10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.flip{
+    transform: rotateY(180deg);
+}

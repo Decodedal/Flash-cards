@@ -21,8 +21,10 @@ export default function NewCard() {
         })
       });
 
-      if (!response.ok) {
+      if (response.ok) {
         // handle error response
+        window.location.href = "/"
+      }else{
         throw new Error('Server response was not ok');
       }
 
